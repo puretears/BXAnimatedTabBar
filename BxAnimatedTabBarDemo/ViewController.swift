@@ -98,9 +98,9 @@ class ViewController: UIViewController {
     DispatchQueue.global().async {
       sleep(4)
 
-      DispatchQueue.main.async {
-        self.animatedTabBarController.tabBarHidden(true, animated: true)
-      }
+//      DispatchQueue.main.async {
+//        self.animatedTabBarController.tabBarHidden(true, animated: true)
+//      }
     }
   }
 }

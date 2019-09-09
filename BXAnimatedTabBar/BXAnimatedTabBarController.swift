@@ -19,6 +19,8 @@ open class BXAnimatedTabBarController: UITabBarController {
   var arrViews = [UIView]()
   var arrBottomAnchor = [NSLayoutConstraint]()
   
+  let blurView = UIVisualEffectView()
+  
   open override var viewControllers: [UIViewController]? {
     didSet {
       initializeContainers()
@@ -44,23 +46,13 @@ open class BXAnimatedTabBarController: UITabBarController {
   open override func viewDidLoad() {
     super.viewDidLoad()
     initializeContainers()
+    
+    let blurEffect = UIBlurEffect(style: .systemThinMaterial)
+    
+    blurView.effect = blurEffect
+    blurView.frame = tabBar.frame
+    tabBar.addSubview(blurView)
   }
-  
-//  override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//    coordinator.animate(alongsideTransition: { (transitionCoordinatorContext) -> Void in
-//      for (index, var layoutAnchor) in self.arrBottomAnchor.enumerated() {
-//        layoutAnchor.isActive = false
-//        layoutAnchor = self.arrViews[index].bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-//
-//        self.arrBottomAnchor[index] = layoutAnchor
-//        self.arrBottomAnchor[index].isActive = true
-//      }
-//      self.view.updateConstraints()
-//    }, completion: { (transitionCoordinatorContext) -> Void in
-//        //refresh view once rotation is completed not in will transition as it returns incorrect frame size.Refresh here
-//    })
-//    super.viewWillTransition(to: size, with: coordinator)
-//  }
   
   /// - MARK: creation methods
   
@@ -100,7 +92,6 @@ open class BXAnimatedTabBarController: UITabBarController {
       
       textLabel.backgroundColor = UIColor.clear
       textLabel.textColor = item.textColor
-//      textLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
       textLabel.font = item.textFont
       textLabel.textAlignment = NSTextAlignment.center
       textLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -181,6 +172,7 @@ open class BXAnimatedTabBarController: UITabBarController {
     let viewContainer = UIView()
     viewContainer.translatesAutoresizingMaskIntoConstraints = false
     viewContainer.isExclusiveTouch = true
+    
     view.addSubview(viewContainer)
     
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(BXAnimatedTabBarController.tapHandler(_:)))
