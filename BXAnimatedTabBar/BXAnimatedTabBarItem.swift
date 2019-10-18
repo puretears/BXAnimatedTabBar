@@ -28,6 +28,8 @@ open class BXAnimatedTabBarItem: UITabBarItem {
   
   open var iconView: (icon: UIImageView, label: UILabel)?
   
+  open var badge: BXBadge?
+  
   open func selectAnimation() {
     guard let animation = animation, let iconView = iconView else { return }
     
@@ -52,5 +54,28 @@ open class BXAnimatedTabBarItem: UITabBarItem {
     guard let animation = animation, let iconView = iconView else { return }
     
     animation.deselectedState(iconView.icon, label: iconView.label)
+  }
+}
+
+extension BXAnimatedTabBarItem {
+  open override var badgeValue: String? {
+    get {
+      return badge?.text
+    }
+    set {
+      if newValue == nil {
+        badge?.removeFromSuperview()
+        badge = nil
+        
+        return
+      }
+      
+      if let iconView = iconView, let containerView = iconView.icon.superview, badge == nil {
+        badge = BXBadge.badge()
+        badge?.addBadge(onView: containerView)
+      }
+      
+      badge?.text = newValue
+    }
   }
 }

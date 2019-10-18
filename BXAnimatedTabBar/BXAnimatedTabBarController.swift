@@ -132,7 +132,8 @@ open class BXAnimatedTabBarController: UITabBarController {
     NSLayoutConstraint.activate([centerX, centerY])
     
     if let width = width {
-      view.widthAnchor.constraint(equalToConstant: width).isActive = true
+      view.widthAnchor.constraint(greaterThanOrEqualToConstant: width).isActive = true
+//      view.widthAnchor.constraint(equalToConstant: width).isActive = true
     }
     
     if let height = height {

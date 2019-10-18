@@ -22,6 +22,7 @@
 		683EF28423254FAC0055EF32 /* BXAnimatedTabBar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 683EF255232495610055EF32 /* BXAnimatedTabBar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		683EF28A23255E010055EF32 /* BXRotationItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683EF28923255E010055EF32 /* BXRotationItemAnimation.swift */; };
 		683EF28D23260D3F0055EF32 /* BXTransitionItemAnnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683EF28C23260D3F0055EF32 /* BXTransitionItemAnnimation.swift */; };
+		68FD471123596AE800D6CD6F /* BXBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FD471023596AE800D6CD6F /* BXBadge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		683EF2802324A0B30055EF32 /* BXAnimatedTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BXAnimatedTabBarItem.swift; sourceTree = "<group>"; };
 		683EF28923255E010055EF32 /* BXRotationItemAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BXRotationItemAnimation.swift; sourceTree = "<group>"; };
 		683EF28C23260D3F0055EF32 /* BXTransitionItemAnnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BXTransitionItemAnnimation.swift; sourceTree = "<group>"; };
+		68FD471023596AE800D6CD6F /* BXBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BXBadge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				683EF27A23249AEE0055EF32 /* Animations */,
 				683EF258232495610055EF32 /* BXAnimatedTabBar.h */,
 				683EF259232495610055EF32 /* Info.plist */,
+				68FD471023596AE800D6CD6F /* BXBadge.swift */,
 				683EF2802324A0B30055EF32 /* BXAnimatedTabBarItem.swift */,
 				683EF27E2324A0820055EF32 /* BXAnimatedTabBarController.swift */,
 				683EF278232496120055EF32 /* BXItemAnimationProtocol.swift */,
@@ -292,6 +295,7 @@
 				683EF27D23249B1A0055EF32 /* BXBounceItemAnimation.swift in Sources */,
 				683EF27F2324A0820055EF32 /* BXAnimatedTabBarController.swift in Sources */,
 				683EF28A23255E010055EF32 /* BXRotationItemAnimation.swift in Sources */,
+				68FD471123596AE800D6CD6F /* BXBadge.swift in Sources */,
 				683EF2812324A0B30055EF32 /* BXAnimatedTabBarItem.swift in Sources */,
 				683EF279232496120055EF32 /* BXItemAnimationProtocol.swift in Sources */,
 			);

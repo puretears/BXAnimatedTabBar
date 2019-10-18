@@ -72,6 +72,7 @@ class ViewController: UIViewController {
     homeTabBarItem.animation = BXBounceItemAnimation()
     myVC1.tabBarItem = homeTabBarItem
     
+    
     let searchTabBarItem     = BXAnimatedTabBarItem(title: "搜索", image: UIImage(systemName: "magnifyingglass"), tag: 0)
     searchTabBarItem.animation = BXFlipLeftTransitionItemAnimation()
     myVC2.tabBarItem = searchTabBarItem
@@ -89,6 +90,12 @@ class ViewController: UIViewController {
     myVC5.tabBarItem = accountTabBarItem
     
     animatedTabBarController.viewControllers = [myVC1, myVC2, myVC3, myVC4, myVC5]
+    
+    homeTabBarItem.badgeValue = "New"
+    
+    let bg = BXBadge(frame: CGRect(x: 0, y: 0, width: 12, height: 12))
+    bg.text = ""
+    bg.addBadge(onView: seriesTabBarItem.iconView!.icon)
     
     addChild(animatedTabBarController)
     animatedTabBarController.view.frame = view.frame
