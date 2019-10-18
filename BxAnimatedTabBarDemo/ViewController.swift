@@ -73,19 +73,19 @@ class ViewController: UIViewController {
     myVC1.tabBarItem = homeTabBarItem
     
     
-    let searchTabBarItem     = BXAnimatedTabBarItem(title: "搜索", image: UIImage(systemName: "magnifyingglass"), tag: 0)
+    let searchTabBarItem     = BXAnimatedTabBarItem(title: "搜索", image: UIImage(systemName: "magnifyingglass"), tag: 1)
     searchTabBarItem.animation = BXFlipLeftTransitionItemAnimation()
     myVC2.tabBarItem = searchTabBarItem
     
-    let seriesTabBarItem     = BXAnimatedTabBarItem(title: "视频系列", image: UIImage(systemName: "map.fill"), tag: 0)
+    let seriesTabBarItem     = BXAnimatedTabBarItem(title: "视频系列", image: UIImage(systemName: "map.fill"), tag: 2)
     seriesTabBarItem.animation = BXBounceItemAnimation()
     myVC3.tabBarItem = seriesTabBarItem
     
-    let blackboardTabBarItem = BXAnimatedTabBarItem(title: "黑板报", image: UIImage(systemName: "pencil.and.outline"), tag: 0)
+    let blackboardTabBarItem = BXAnimatedTabBarItem(title: "黑板报", image: UIImage(systemName: "pencil.and.outline"), tag: 3)
     blackboardTabBarItem.animation = BXFlipRightTransitionItemAnimation()
     myVC4.tabBarItem = blackboardTabBarItem
     
-    let accountTabBarItem    = BXAnimatedTabBarItem(title: "我的泊学", image: UIImage(systemName: "person.crop.circle.fill"), tag: 0)
+    let accountTabBarItem    = BXAnimatedTabBarItem(title: "我的泊学", image: UIImage(systemName: "person.crop.circle.fill"), tag: 4)
     accountTabBarItem.animation = BXRightRotationAnimation()
     myVC5.tabBarItem = accountTabBarItem
     
@@ -96,6 +96,10 @@ class ViewController: UIViewController {
     let bg = BXBadge(frame: CGRect(x: 0, y: 0, width: 12, height: 12))
     bg.text = ""
     bg.addBadge(onView: seriesTabBarItem.iconView!.icon)
+    
+    /// Do not forget link `bg` back to `seriesTabBarItem.badge`
+    /// We need this reference to clear the badge.
+    seriesTabBarItem.badge = bg
     
     addChild(animatedTabBarController)
     animatedTabBarController.view.frame = view.frame

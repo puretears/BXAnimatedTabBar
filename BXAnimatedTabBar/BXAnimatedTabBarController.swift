@@ -228,6 +228,8 @@ open class BXAnimatedTabBarController: UITabBarController {
       if let navVC = self.viewControllers![selectedIndex] as? UINavigationController {
         navVC.popToRootViewController(animated: true)
       }
+      
+      items[selectedIndex].badgeValue = nil
     }
     
     delegate?.tabBarController?(self, didSelect: controller)
