@@ -15,7 +15,7 @@ open class BXBounceItemAnimation: BXItemAnimation {
   /// - parameter label: animating `UITabBarItem` label
   open override func selectAnimation(_ icon: UIImageView, label: UILabel) {
     playBounceAnimation(icon)
-    label.textColor = textSelectedColor
+    selectedState(icon, label: label)
   }
   
   /// Start animation when the tab item is deselected.
@@ -59,11 +59,5 @@ open class BXBounceItemAnimation: BXItemAnimation {
     bounceAnimation.calculationMode = .cubic
     
     icon.layer.add(bounceAnimation, forKey: nil)
-    
-    if let iconImage = icon.image {
-      let renderImage = iconImage.withRenderingMode(.alwaysTemplate)
-      icon.image = renderImage
-      icon.tintColor = iconSelectedColor
-    }
   }
 }

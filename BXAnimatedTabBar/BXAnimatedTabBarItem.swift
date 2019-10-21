@@ -19,8 +19,6 @@ open class BXAnimatedTabBarItem: UITabBarItem {
   /// The font used to render the UITabBarItem text.
   open var textFont: UIFont = UIFont.systemFont(ofSize: 10.0, weight: .medium)
   
-  open var yOffSet: CGFloat = 0
-  
   open var iconColor: UIColor = .secondaryLabel
   
   open var bgDefaultColor: UIColor = .clear

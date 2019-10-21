@@ -100,10 +100,10 @@ open class BXAnimatedTabBarController: UITabBarController {
       
       container.addSubview(iconView)
       
-      createConstraints(iconView, container: container, width: 26, height: 26, yOffset: -4 - item.yOffSet)
+      createConstraints(iconView, container: container, width: 26, height: 26, yOffset: -4 - item.yOffset)
       container.addSubview(textLabel)
       let textLabelWidth = tabBar.frame.size.width / CGFloat(items.count) - 5.0
-      createConstraints(textLabel, container: container, width: textLabelWidth, yOffset: 16 - item.yOffSet)
+      createConstraints(textLabel, container: container, width: textLabelWidth, yOffset: 16 - item.yOffset)
 
       if item.isEnabled == false {
           iconView.alpha = 0.5

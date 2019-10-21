@@ -25,8 +25,8 @@ open class BXRotationItemAnimation: BXItemAnimation {
    - parameter textLabel: animating UITabBarItem textLabel
    */
   open override func selectAnimation(_ icon: UIImageView, label: UILabel) {
-      playRoatationAnimation(icon)
-      label.textColor = textSelectedColor
+    playRoatationAnimation(icon)
+    selectedState(icon, label: label)
   }
 
   /**
@@ -37,9 +37,9 @@ open class BXRotationItemAnimation: BXItemAnimation {
    - parameter defaultTextColor: default UITabBarItem text color
    - parameter defaultIconColor: default UITabBarItem icon color
    */
-open override func deselectAnimation(
-  _ icon: UIImageView, label: UILabel,
-  defaultIconColor: UIColor, defaultTextColor: UIColor) {
+  open override func deselectAnimation(
+    _ icon: UIImageView, label: UILabel,
+    defaultIconColor: UIColor, defaultTextColor: UIColor) {
     label.textColor = defaultTextColor
 
     if let iconImage = icon.image {
@@ -58,7 +58,7 @@ open override func deselectAnimation(
    - parameter icon:      animating UITabBarItem icon
    - parameter textLabel: animating UITabBarItem textLabel
    */
-open override func selectedState(_ icon: UIImageView, label: UILabel) {
+  open override func selectedState(_ icon: UIImageView, label: UILabel) {
     label.textColor = textSelectedColor
 
     if let iconImage = icon.image {
@@ -81,12 +81,6 @@ open override func selectedState(_ icon: UIImageView, label: UILabel) {
     rotateAnimation.duration = TimeInterval(duration)
 
     icon.layer.add(rotateAnimation, forKey: nil)
-
-    if let iconImage = icon.image {
-      let renderImage = iconImage.withRenderingMode(.alwaysTemplate)
-      icon.image = renderImage
-      icon.tintColor = iconSelectedColor
-    }
   }
 }
 
