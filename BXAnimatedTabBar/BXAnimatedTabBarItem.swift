@@ -15,11 +15,9 @@ open class BXAnimatedTabBarItem: UITabBarItem {
   /// Animation for `UITabBarItem`, use animations under *Animations* directory.
   open var animation: BXItemAnimation!
   
-  open var textColor: UIColor = .secondaryLabel
-  /// The font used to render the UITabBarItem text.
-  open var textFont: UIFont = UIFont.systemFont(ofSize: 10.0, weight: .medium)
-  
   open var iconColor: UIColor = .secondaryLabel
+  open var textColor: UIColor = .secondaryLabel
+  open var textFont: UIFont = UIFont.systemFont(ofSize: 10.0, weight: .medium)
   
   open var bgDefaultColor: UIColor = .clear
   open var bgSelectedColor: UIColor = .clear

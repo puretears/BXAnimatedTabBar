@@ -24,10 +24,6 @@ open class BXBadge: UILabel {
     activateConstraints()
   }
   
-  open override func layoutSubviews() {
-//    activateConstraints()
-  }
-  
   open override var intrinsicContentSize: CGSize {
     var contentSize = super.intrinsicContentSize
     contentSize.width += 10

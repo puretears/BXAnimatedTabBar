@@ -16,9 +16,6 @@ open class BXAnimatedTabBarController: UITabBarController {
   
   /// Containers
   var containers: [String: UIView] = [:]
-  var arrViews = [UIView]()
-  var arrBottomAnchor = [NSLayoutConstraint]()
-  
   let blurView = UIVisualEffectView()
   
   open override var viewControllers: [UIViewController]? {
@@ -78,10 +75,11 @@ open class BXAnimatedTabBarController: UITabBarController {
       
       let iconImage = item.image ?? item.iconView?.icon.image
       let iconView = UIImageView(image: iconImage?.withRenderingMode(renderMode))
-      iconView.translatesAutoresizingMaskIntoConstraints = false
+      
       iconView.tintColor = item.iconColor
-      iconView.highlightedImage = item.selectedImage?.withRenderingMode(renderMode)
       iconView.contentMode = .scaleAspectFill
+      iconView.translatesAutoresizingMaskIntoConstraints = false
+      iconView.highlightedImage = item.selectedImage?.withRenderingMode(renderMode)
       
       let textLabel = UILabel()
       if let title = item.title, !title.isEmpty {
@@ -90,17 +88,17 @@ open class BXAnimatedTabBarController: UITabBarController {
         textLabel.text = item.iconView?.label.text
       }
       
-      textLabel.backgroundColor = UIColor.clear
-      textLabel.textColor = item.textColor
       textLabel.font = item.textFont
+      textLabel.textColor = item.textColor
+      textLabel.backgroundColor = UIColor.clear
       textLabel.textAlignment = NSTextAlignment.center
       textLabel.translatesAutoresizingMaskIntoConstraints = false
 
       container.backgroundColor = item.bgDefaultColor
       
       container.addSubview(iconView)
-      
       createConstraints(iconView, container: container, width: 26, height: 26, yOffset: -4 - item.yOffset)
+      
       container.addSubview(textLabel)
       let textLabelWidth = tabBar.frame.size.width / CGFloat(items.count) - 5.0
       createConstraints(textLabel, container: container, width: textLabelWidth, yOffset: 16 - item.yOffset)
@@ -109,7 +107,10 @@ open class BXAnimatedTabBarController: UITabBarController {
           iconView.alpha = 0.5
           textLabel.alpha = 0.5
       }
+      
       item.iconView = (icon: iconView, label: textLabel)
+      item.image = nil
+      item.title = ""
       
       if 0 == index { // selected first elemet
           item.selectedState()
@@ -119,8 +120,6 @@ open class BXAnimatedTabBarController: UITabBarController {
           container.backgroundColor = item.bgDefaultColor
       }
 
-      item.image = nil
-      item.title = ""
       index += 1
     }
   }
@@ -132,8 +131,7 @@ open class BXAnimatedTabBarController: UITabBarController {
     NSLayoutConstraint.activate([centerX, centerY])
     
     if let width = width {
-      view.widthAnchor.constraint(greaterThanOrEqualToConstant: width).isActive = true
-//      view.widthAnchor.constraint(equalToConstant: width).isActive = true
+      view.widthAnchor.constraint(equalToConstant: width).isActive = true
     }
     
     if let height = height {
@@ -176,13 +174,12 @@ open class BXAnimatedTabBarController: UITabBarController {
     
     view.addSubview(viewContainer)
     
-    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(BXAnimatedTabBarController.tapHandler(_:)))
+    let tapGesture = UITapGestureRecognizer(
+      target: self, action: #selector(BXAnimatedTabBarController.tapHandler(_:)))
     tapGesture.numberOfTouchesRequired = 1
     viewContainer.addGestureRecognizer(tapGesture)
-    arrViews.append(viewContainer)
     
     let bottomAnchor = viewContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-    arrBottomAnchor.append(bottomAnchor)
     bottomAnchor.isActive = true
     
     let height = viewContainer.heightAnchor.constraint(equalToConstant: 48)
@@ -199,11 +196,9 @@ open class BXAnimatedTabBarController: UITabBarController {
     }
     
     let currentIndex = gestureView.tag
-    
     if items[currentIndex].isEnabled == false { return }
     
     let controller = children[currentIndex]
-    
     if let shouldSelect = delegate?.tabBarController?(self, shouldSelect: controller), !shouldSelect { return }
     
     if selectedIndex != currentIndex {
@@ -237,66 +232,65 @@ open class BXAnimatedTabBarController: UITabBarController {
 }
 
 extension BXAnimatedTabBarController {
+  /**
+   Change selected color for each UITabBarItem
+   - parameter textSelectedColor: set new color for text
+   - parameter iconSelectedColor: set new color for icon
+   */
+  open func changeSelectedColor(_ textSelectedColor: UIColor, iconSelectedColor: UIColor) {
+    for index in 0 ..< animatedItems.count {
+      let item = animatedItems[index]
 
-    /**
-     Change selected color for each UITabBarItem
-     - parameter textSelectedColor: set new color for text
-     - parameter iconSelectedColor: set new color for icon
-     */
-    open func changeSelectedColor(_ textSelectedColor: UIColor, iconSelectedColor: UIColor) {
-      for index in 0 ..< animatedItems.count {
-        let item = animatedItems[index]
+      item.animation.textSelectedColor = textSelectedColor
+      item.animation.iconSelectedColor = iconSelectedColor
 
-        item.animation.textSelectedColor = textSelectedColor
-        item.animation.iconSelectedColor = iconSelectedColor
-
-        if item == tabBar.selectedItem {
-            item.selectedState()
-        }
+      if item == tabBar.selectedItem {
+          item.selectedState()
       }
     }
+  }
 
-    /**
-     Hide UITabBarController
-     - parameter isHidden: A Boolean indicating whether the UITabBarController is displayed
-     */
-    open func tabBarHidden(_ isHidden: Bool, animated: Bool) {
-      func _tabBarHidden(_ isHidden: Bool) {
-        let direction: CGFloat = isHidden ? 1 : -1
-        
-        for item in self.animatedItems {
-          if let iconView = item.iconView {
-            iconView.icon.superview?.center.y += (200 * direction)
-          }
+  /**
+   Hide UITabBarController
+   - parameter isHidden: A Boolean indicating whether the UITabBarController is displayed
+   */
+  open func tabBarHidden(_ isHidden: Bool, animated: Bool) {
+    func _tabBarHidden(_ isHidden: Bool) {
+      let direction: CGFloat = isHidden ? 1 : -1
+      
+      for item in self.animatedItems {
+        if let iconView = item.iconView {
+          iconView.icon.superview?.center.y += (200 * direction)
         }
-        
-        self.tabBar.center.y += (200 * direction)
       }
       
-      if animated {
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn], animations: {
-          _tabBarHidden(isHidden)
-        })
-      }
-      else {
+      self.tabBar.center.y += (200 * direction)
+    }
+    
+    if animated {
+      UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn], animations: {
         _tabBarHidden(isHidden)
-      }
+      })
     }
-
-    /**
-     Selected UITabBarItem with animaton
-     - parameter from: Index for unselected animation
-     - parameter to:   Index for selected animation
-     */
-    open func setSelectIndex(from: Int, to: Int) {
-      selectedIndex = to
-
-      let containerFrom = animatedItems[from].iconView?.icon.superview
-      containerFrom?.backgroundColor = animatedItems[from].bgDefaultColor
-      animatedItems[from].deselectAnimation()
-
-      let containerTo = animatedItems[to].iconView?.icon.superview
-      containerTo?.backgroundColor = animatedItems[to].bgSelectedColor
-      animatedItems[to].selectAnimation()
+    else {
+      _tabBarHidden(isHidden)
     }
+  }
+
+  /**
+   Selected UITabBarItem with animaton
+   - parameter from: Index for unselected animation
+   - parameter to:   Index for selected animation
+   */
+  open func setSelectIndex(from: Int, to: Int) {
+    selectedIndex = to
+
+    let containerFrom = animatedItems[from].iconView?.icon.superview
+    containerFrom?.backgroundColor = animatedItems[from].bgDefaultColor
+    animatedItems[from].deselectAnimation()
+
+    let containerTo = animatedItems[to].iconView?.icon.superview
+    containerTo?.backgroundColor = animatedItems[to].bgSelectedColor
+    animatedItems[to].selectAnimation()
+  }
 }
