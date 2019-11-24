@@ -1,0 +1,1 @@
+../../BXAnimatedTabBar/BXBadge.swift
