@@ -1,0 +1,1 @@
+../../BXAnimatedTabBar/BXItemAnimationProtocol.swift
