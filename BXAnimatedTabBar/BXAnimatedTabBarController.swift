@@ -149,6 +149,7 @@ open class BXAnimatedTabBarController: UITabBarController {
       containerDict["container\(index)"] = viewContainer
     }
     
+    /// |-(0)-[container0]-(0)-[container1=container0]-...-(0)-|
     var vfs = "H:|-(0)-[container0]"
     for index in 1 ..< items.count {
       vfs += "-(0)-[container\(index)(==container0)]"
