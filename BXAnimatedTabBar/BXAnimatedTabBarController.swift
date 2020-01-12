@@ -9,6 +9,8 @@
 import UIKit
 
 open class BXAnimatedTabBarController: UITabBarController {
+  open var hidden: Bool = false
+  
   /// The animated items.
   open var animatedItems: [BXAnimatedTabBarItem] {
     return tabBar.items as? [BXAnimatedTabBarItem] ?? []
@@ -258,6 +260,7 @@ extension BXAnimatedTabBarController {
   open func tabBarHidden(_ isHidden: Bool, animated: Bool) {
     func _tabBarHidden(_ isHidden: Bool) {
       let direction: CGFloat = isHidden ? 1 : -1
+      hidden = isHidden
       
       for item in self.animatedItems {
         if let iconView = item.iconView {
