@@ -1,1 +1,0 @@
-../../BXAnimatedTabBar/BXAnimatedTabBarItem.swift

@@ -1,1 +1,0 @@
-../../BXAnimatedTabBar/Animations/TransitionAnimation/BXTransitionItemAnimation.swift
