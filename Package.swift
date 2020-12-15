@@ -25,8 +25,7 @@ let package = Package(
         .target(
             name: "BXAnimatedTabBar",
             dependencies: [],
-            path: "Sources",
-            exclude: ["Sources/BXAnimatedTabBarPackage/Info.plist"]
+            path: "Sources"
         ),
         .testTarget(
             name: "BXAnimatedTabBarTests",
